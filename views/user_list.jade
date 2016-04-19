@@ -3,4 +3,31 @@ extends layout
 block content
   .page-header
     h3 User List
-    h1 #{userList}
+
+    table#sample_1.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th.table-checkbox
+            input.group-checkable(type='checkbox', data-set='#sample_1 .checkboxes')
+          th
+            | Username
+          th
+            | Email
+          th
+            | Gender
+          th
+            | Location
+          th
+            | Status
+      tbody
+      each item in userList
+        tr.odd.gradeX
+          td
+            input.checkboxes(type='checkbox', value='1')
+          td= item.profile.name
+          td= item.email
+          td= item.profile.gender
+          td= item.profile.location
+          td
+            span.label.label-sm.label-success
+              | Approved
