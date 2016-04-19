@@ -17,6 +17,10 @@
           a(href='/api') API Examples
         li(class=(title == 'Contact') ? 'active' : undefined)
           a(href='/contact') Contact
+        li(class=(title == 'Blog') ? 'active' : undefined)
+          a(href='/blog') Blog
+        li(class=(title == 'User List') ? 'active' : undefined)
+          a(href='/user_list') User List
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)

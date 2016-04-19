@@ -33,6 +33,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var blogController = require('./controllers/blog');
 
 /**
  * API keys and Passport configuration.
@@ -124,6 +125,10 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/user_list', userController.getUserList);
+app.get('/blog', blogController.getBlog);
+app.get('/create', blogController.getNewBlog);
+app.post('/create', blogController.saveNewBlog);
+
 /**
  * API examples routes.
  */

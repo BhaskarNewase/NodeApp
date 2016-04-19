@@ -1,0 +1,42 @@
+var Blog = require('../models/Blog');
+// get details of blog
+
+exports.getBlog = function(req, res) {
+  Blog.find(function(err, blogList){
+  	res.render('blog/index',{
+  		title: 'Blog',
+  		blogList: blogList
+  	});
+  });
+};
+
+exports.getNewBlog = function(req, res) {
+  	res.render('blog/create',{
+  		title: 'Create New Blog'
+  	});
+};
+
+exports.saveNewBlog = function(req, res, next) {
+  	req.assert('title', 'Title cannot be blank').notEmpty();
+  	req.assert('description', 'Description cannot be blank').notEmpty();
+
+  	var errors = req.validationErrors();
+
+  	if (errors) {
+    	req.flash('errors', errors);
+    	return res.redirect('create');
+  	}
+
+  	var blog = new Blog ({
+      title: req.body.title,
+      description: req.body.description
+    });
+
+  	blog.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', { msg: 'Profile information updated.' });
+      res.redirect('/blog');
+    });
+};
