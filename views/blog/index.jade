@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Blog
+    a(class="btn", data-action="bea", href='/create').Be Create New Blog
+    .col-md-12
+      // BEGIN SAMPLE TABLE PORTLET
+      .portlet.box.red
+        .portlet-title
+          .caption
+          .tools
+            a.collapse(href='javascript:;', data-original-title='', title='')
+            a.config(data-toggle='modal', href='#portlet-config', data-original-title='', title='')
+            a.reload(href='javascript:;', data-original-title='', title='')
+            a.remove(href='javascript:;', data-original-title='', title='')
+        .portlet-body
+          .table-scrollable
+            table.table.table-hover
+              thead
+                tr
+                  th
+                    | Title
+                  th
+                    | View
+                  th
+                    | Actions
+              tbody
+                for blog in blogList
+                  tr
+                    td= blog.title
+                    td
+                      a(class="btn", data-action="bea").Be View  
+                    td
+                      a(class="btn", data-action="bea").Be Edit
+                      a(class="btn", data-action="bea").Be Delete
+                    
