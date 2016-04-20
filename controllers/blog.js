@@ -40,3 +40,21 @@ exports.saveNewBlog = function(req, res, next) {
       res.redirect('/blog');
     });
 };
+
+// GET BLOG BY ID
+
+exports.getBlogDetails = function(req, res, next) {
+
+  Blog.findOne({_id: req.params.id}, function(err, blogRecord){
+
+    if (err) {
+      req.flash('errors', {msg : 'No Record found'});
+      return res.redirect('/blog');
+    };
+    
+    res.render('blog/blog_details',{
+      title : 'Blog details',
+      blogRecord: blogRecord
+    });
+  });
+};

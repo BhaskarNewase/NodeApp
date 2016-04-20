@@ -128,6 +128,7 @@ app.get('/user_list', userController.getUserList);
 app.get('/blog', blogController.getBlog);
 app.get('/create', blogController.getNewBlog);
 app.post('/create', blogController.saveNewBlog);
+app.get('/blog-details/:id', blogController.getBlogDetails);
 
 /**
  * API examples routes.
