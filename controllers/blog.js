@@ -58,3 +58,27 @@ exports.getBlogDetails = function(req, res, next) {
     });
   });
 };
+
+// DELETE BLOG BY ID
+exports.destroyBlogDetails = function(req, res, next) {
+  Blog.remove({_id:req.params.id}, function(err){
+    if (err) {
+      return next(err);
+    };
+    req.flash('info', {msg:'Blog has been deleted.'});
+    res.redirect('/blog');
+  });
+};
+
+exports.getBlogDetailById = function(req, res, next) {
+  Blog.findOne({_id: req.params.id}, function(err, data){
+    if (err) {
+      req.flash('errors', {msg:'No Record Found'});
+      res.redirect('/blog');
+    };
+    res.render('blog/create',{
+      title:'Update Details',
+      data:data
+    });
+  });
+};
