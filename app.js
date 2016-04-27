@@ -130,7 +130,8 @@ app.get('/create', blogController.getNewBlog);
 app.post('/create', blogController.saveNewBlog);
 app.get('/blog-details/:id', blogController.getBlogDetails);
 app.get('/blog-remove/:id', blogController.destroyBlogDetails);
-app.get('/blog-edit/:id', blogController.getBlogDetailById)
+app.get('/blog-edit/:id', blogController.getBlogDetailById);
+app.post('/blog-edit/:id', blogController.updateBlogDetails);
 
 /**
  * API examples routes.

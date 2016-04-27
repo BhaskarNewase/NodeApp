@@ -82,3 +82,28 @@ exports.getBlogDetailById = function(req, res, next) {
     });
   });
 };
+
+// UPDATE BLOG
+exports.updateBlogDetails = function(req, res, next) {
+    req.assert('title', 'Title cannot be blank').notEmpty();
+    req.assert('description', 'Description cannot be blank').notEmpty();
+
+    var errors = req.validationErrors();
+
+    if (errors) {
+        req.flash('errors', errors);
+        return res.redirect('create');
+    }
+    var id = req.params.id;
+    var title = req.body.title;
+    var description = req.body.description;
+    Blog.update({ title: title, description: description}, function(id) {
+        res.redirect('/blog-edit/'+id)
+    });
+
+};
+
+
+
+
+
