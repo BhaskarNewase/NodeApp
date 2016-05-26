@@ -41,6 +41,44 @@ exports.saveNewBlog = function(req, res, next) {
     });
 };
 
+
+exports.add_comments = function(req, res, next) {
+    req.assert('user_name', 'User name cannot be blank').notEmpty();
+    req.assert('email', 'Email cannot be blank').notEmpty();
+    req.assert('comment', 'Comment cannot be blank').notEmpty();
+
+    var errors = req.validationErrors();
+
+    if (errors) {
+      req.flash('errors', errors);
+      return res.redirect('/blog');
+    }
+
+    Blog.findById(req.body.id, function(err, user) {
+      if (err) {
+        return next(err);
+      }
+
+      user.comments.email = req.body.email;
+      user.comments.name = req.body.user_name;
+      user.comments.comment = req.body.comment;
+      
+      user.save(function(err) {
+        if (err) {
+          if (err.code === 11000) {
+            req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
+            return res.redirect('/blog');
+          } else {
+            return next(err);
+          }
+        }
+        req.flash('success', { msg: 'Comment posted updated.' });
+        res.redirect('/blog');
+      });
+    });
+    
+};
+
 // GET BLOG BY ID
 
 exports.getBlogDetails = function(req, res, next) {

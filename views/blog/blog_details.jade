@@ -34,86 +34,31 @@ block content
             // end news-tag-data
             div
               p= blogRecord.description
-                
-            hr
-            .media
-              h3 Comments
-              a.pull-left(href='javascript:;')
-                img.media-object(alt='', src='/img/screen7.jpg')
-              .media-body
-                h4.media-heading
-                  | Media heading 
-                  span
-                    | 5 hours ago / 
-                    a(href='javascript:;')
-                      | Reply
-                p
-                  | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                hr
-                // Nested media object
-                .media
-                  a.pull-left(href='javascript:;')
-                    img.media-object(alt='', src='/img/screen7.jpg')
-                  .media-body
-                    h4.media-heading
-                      | Media heading 
-                      span
-                        | 17 hours ago / 
-                        a(href='javascript:;')
-                          | Reply
-                    p
-                      | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                // end media
-                hr
-                .media
-                  a.pull-left(href='javascript:;')
-                    img.media-object(alt='', src='/img/screen7.jpg')
-                  .media-body
-                    h4.media-heading
-                      | Media heading 
-                      span
-                        | 2 days ago / 
-                        a(href='javascript:;')
-                          | Reply
-                    p
-                      | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                // end media
-            // end media
-            .media
-              a.pull-left(href='javascript:;')
-                img.media-object(alt='', src='/img/screen7.jpg')
-              .media-body
-                h4.media-heading
-                  | Media heading 
-                  span
-                    | July 5,2013 / 
-                    a(href='javascript:;')
-                      | Reply
-                p
-                  | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-            // end media
+ 
             hr
             .post-comment
               h3 Leave a Comment
-              form(role='form', action='#')
+              form(role='form', method='post', action='/add-comments')
+                input(type='hidden', name='_csrf', value=_csrf)
                 .form-group
                   label.control-label
                     | Name 
                     span.required
                       | *
-                  input.form-control(type='text')
+                  input.form-control(type='text' name='user_name')
+                  input.form-control(type='hidden', name='id' ,value='#{blogRecord._id}')
                 .form-group
                   label.control-label
                     | Email 
                     span.required
                       | *
-                  input.form-control(type='text')
+                  input.form-control(type='text' name='email')
                 .form-group
                   label.control-label
                     | Message 
                     span.required
                       | *
-                  textarea.col-md-10.form-control(rows='8')
+                  textarea.col-md-10.form-control(rows='8' name='comment')
                 button.margin-top-20.btn.blue(type='submit') Post a Comment
           // end col-md-9
           
