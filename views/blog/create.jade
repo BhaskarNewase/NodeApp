@@ -12,6 +12,9 @@ block content
     .form-group
       label(class='col-sm-2 control-label', for='message') Description
       .col-sm-8
+      if (typeof(data) !== 'undefined')
+        textarea.form-control(name='description', id='message', rows='7')| #{data.description}
+      else
         textarea.form-control(name='description', id='message', rows='7')
     .form-group
       .col-sm-offset-2.col-sm-8
